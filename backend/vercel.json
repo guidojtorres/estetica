@@ -3,5 +3,12 @@
   "builds": [
     { "src": "*.js", "use": "@vercel/node" },
     { "src": "uploads/**", "use": "@vercel/static" }
-  ]
+  ],
+
+  "functions": {
+    "api/*.*": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  }
 }
