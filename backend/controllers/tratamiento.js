@@ -132,6 +132,7 @@ exports.update = async (req, res) => {
         .toFile("uploads/" + newName)
         .catch((err) => {
           console.log(err);
+          console.log(`\n ${__dirname}`);
           res
             .status(500)
             .send({ status: "KO", errDesc: "Error subiendo archivou" });
