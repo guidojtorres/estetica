@@ -24,7 +24,11 @@ exports.create = async (req, res) => {
         .toFormat("png")
         .png({ quality: 50 })
         .toFile("./uploads/" + newName)
-        .catch((err) => res.status(500).send({ status: "KO", errDesc: err }));
+        .catch((err) =>
+          res
+            .status(500)
+            .send({ status: "KO", errDesc: "Error subiendo archivou" })
+        );
 
       pathFotos.push("/uploads/" + newName);
     })
