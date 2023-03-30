@@ -1,8 +1,8 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const server = "http://localhost:5000/api";
-export const fileServer = "http://localhost:5000";
+const server = process.env.REACT_APP_SERVER + "/api";
+export const fileServer = process.env.REACT_APP_SERVER;
 
 export function getFormData(object: any) {
   const formData = new FormData();
