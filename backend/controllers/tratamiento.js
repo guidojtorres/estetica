@@ -130,11 +130,12 @@ exports.update = async (req, res) => {
         .toFormat("png")
         .png({ quality: 50 })
         .toFile("./uploads/" + newName)
-        .catch((err) =>
+        .catch((err) => {
+          console.log(err);
           res
             .status(500)
-            .send({ status: "KO", errDesc: "Error subiendo archivou" })
-        );
+            .send({ status: "KO", errDesc: "Error subiendo archivou" });
+        });
 
       pathFotos.push("/uploads/" + newName);
     })
