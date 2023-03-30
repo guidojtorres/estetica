@@ -129,7 +129,7 @@ exports.update = async (req, res) => {
         .resize(475, 385)
         .toFormat("png")
         .png({ quality: 50 })
-        .toFile(process.cwd() + "/uploads/" + newName)
+        .toFile("/tmp/" + newName)
         .catch((err) => {
           console.log(err);
           res
