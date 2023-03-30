@@ -1,14 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "*.js", "use": "@vercel/node" },
-    { "src": "uploads/**", "use": "@vercel/static" }
-  ],
+  "builds": [{ "src": "*.js", "use": "@vercel/node" }],
 
-  "functions": {
-    "api/*.*": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  }
+  "routes": [{ "src": "/.*", "dest": "https://my-old-site.com" }]
 }
