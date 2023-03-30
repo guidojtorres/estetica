@@ -129,10 +129,9 @@ exports.update = async (req, res) => {
         .resize(475, 385)
         .toFormat("png")
         .png({ quality: 50 })
-        .toFile("../uploads/" + newName)
+        .toFile(process.cwd() + "/uploads/" + newName)
         .catch((err) => {
           console.log(err);
-          console.log(`\n ${process.cwd()}`);
           res
             .status(500)
             .send({ status: "KO", errDesc: "Error subiendo archivou" });
