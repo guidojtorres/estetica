@@ -29,3 +29,14 @@ exports.update = async (req, res) => {
       .catch((err) => res.send({ status: "KO", info: {}, errDesc: err }));
   }
 };
+
+exports.all = (req, res) => {
+  HorarioModel.find()
+    .then((data) => res.send({ status: "OK", errDesc: "", info: data }))
+    .catch((err) =>
+      res.status(500).send({
+        status: "KO",
+        errDesc: err.message || "Error obteniendo horarios",
+      })
+    );
+};

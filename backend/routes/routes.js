@@ -76,7 +76,7 @@ router.post("/contactos", async (req, res) => {
 });
 
 router.get("/contactos", async (req, res) => {
-  ContactoController.all(req, res);
+  HorarioController.all(req, res);
 });
 
 router.put("/horarios", async (req, res) => {
