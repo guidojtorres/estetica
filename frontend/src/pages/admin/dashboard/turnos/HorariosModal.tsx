@@ -27,7 +27,7 @@ const HorariosModal = ({
   const handleClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     setHorariosForm({
       ...horariosForm,
-      turno: (e.target as HTMLInputElement).value,
+      duracion: (e.target as HTMLInputElement).value,
     });
   };
   return isVisible ? (
@@ -54,7 +54,7 @@ const HorariosModal = ({
                 onChange={(e) => {
                   setHorariosForm({
                     ...horariosForm,
-                    duracion: e.target.value,
+                    turno: e.target.value,
                   });
                 }}
               >

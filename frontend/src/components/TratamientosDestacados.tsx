@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
+import { fileServer } from "../utils/APICalls";
 
 const CardDestacada = ({
   titulo,
@@ -15,7 +16,7 @@ const CardDestacada = ({
 }) => {
   return (
     <div className="card-destacada">
-      <img src="./img/botox.png" alt="" />
+      <img src={fileServer + pathFoto} alt="" />
       <div className="card-destacada-texto">
         <h5>{titulo}</h5>
         <p>{descripcion}</p>

@@ -6,6 +6,9 @@ import PasoDos from "./PasoDos";
 import StepperBar from "../StepperBar";
 import PasoTres from "./PasoTres";
 import Congratulations from "./Congratulations";
+import { eachDayOfInterval } from "date-fns";
+import { fetchFromServer } from "../../utils/APICalls";
+import { ITurno } from "../../utils/types";
 
 export const TurnosContext = React.createContext({
   turnoForm: {},
@@ -22,6 +25,38 @@ const TurnoForm = ({
   setPaso: Function;
 }) => {
   const [turnoForm, setTurnoForm] = React.useState({});
+  const [fechasArray, setFechasArray] = React.useState<Date[]>([new Date()]);
+  const [turnos, setTurnos] = React.useState<ITurno[]>([{} as ITurno]);
+  const [horarioConfig, setHorarioConfig] = React.useState();
+
+  const generateFechasArray = () => {
+    let masUnAno = new Date(
+      new Date(new Date().setMonth(new Date().getMonth() + 4))
+    );
+
+    let intervalo = eachDayOfInterval({
+      start: new Date(),
+      end: masUnAno,
+    });
+
+    let intervaloFiltrado = intervalo.filter(
+      (unaFecha: Date) => unaFecha.getDay() === 1 || unaFecha.getDay() === 5
+    );
+    setFechasArray(intervaloFiltrado);
+  };
+
+  React.useEffect(() => {
+    fetchFromServer("/turnos", "GET")
+      .then((res: any) => setTurnos(res.data.info))
+      .catch((e) => alert(e));
+
+    fetchFromServer("/horarios", "GET")
+      .then((res: any) => {
+        generateFechasArray();
+        setHorarioConfig(res.data.info[0]);
+      })
+      .catch((e) => alert(e));
+  }, []);
   return (
     <TurnosContext.Provider
       value={{
@@ -39,7 +74,13 @@ const TurnoForm = ({
             exit={"exit"}
           >
             <StepperBar paso={paso} setPaso={setPaso} />
-            <PasoUno paso={paso} setPaso={setPaso} />
+            <PasoUno
+              paso={paso}
+              setPaso={setPaso}
+              fechasArray={fechasArray}
+              turnos={turnos}
+              horarioConfig={horarioConfig}
+            />
             <PasoDos paso={paso} setPaso={setPaso} />
             <PasoTres paso={paso} setPaso={setPaso} />
             <Congratulations paso={paso} />

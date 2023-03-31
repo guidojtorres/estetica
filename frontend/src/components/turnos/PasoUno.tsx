@@ -5,25 +5,42 @@ import {
   OpacityVariants,
 } from "../../utils/animations";
 import Button from "../Button";
+import { ITurno } from "../../utils/types";
+import {
+  convertIntToDay,
+  convertIntToMonth,
+  generateHorariosArray,
+} from "../../utils/functions";
+
+function addHours(date: Date, h: number) {
+  date.setTime(date.getTime() + h * 60 * 60 * 1000);
+  return date;
+}
 
 const UnaFecha = ({
+  fecha,
   fechaElegida,
   id,
   setFechaElegida,
 }: {
+  fecha: Date;
   id: number;
-  fechaElegida: number;
+  fechaElegida: Date | null;
   setFechaElegida: Function;
 }) => {
+  const month = convertIntToMonth(fecha.getMonth());
+  const day = convertIntToDay(fecha.getDay() - 1);
+  const num = fecha.getUTCDate();
+
   return (
     <motion.div
-      className={`una-fecha ${fechaElegida === id && "active"}`}
-      onClick={() => setFechaElegida(id)}
+      className={`una-fecha ${fechaElegida === fecha && "active"}`}
+      onClick={() => setFechaElegida(fecha)}
       variants={OpacityVariants}
     >
-      <span>NOV</span>
-      <p>Lun</p>
-      <p>26</p>
+      <span>{month}</span>
+      <p>{day}</p>
+      <p>{num}</p>
     </motion.div>
   );
 };
@@ -32,25 +49,52 @@ const UnHorario = ({
   id,
   horarioElegido,
   setHorarioElegido,
+  horario,
+  isDisabled,
 }: {
   id: number;
   horarioElegido: number;
   setHorarioElegido: Function;
+  horario: string;
+  isDisabled: boolean;
 }) => {
   return (
     <motion.div
-      className={`pill-horario ${horarioElegido === id && "active"}`}
-      onClick={() => setHorarioElegido(id)}
+      className={`pill-horario ${horarioElegido === id && "active"} 
+      ${isDisabled && "disabled"}`}
+      onClick={() => !isDisabled && setHorarioElegido(id)}
       variants={OpacityVariants}
     >
-      <span>11:00 AM</span>
+      <span>{horario}</span>
     </motion.div>
   );
 };
 
-const PasoUno = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
-  const [fechaElegida, setFechaElegida] = React.useState(0);
+const PasoUno = ({
+  paso,
+  setPaso,
+  fechasArray,
+  turnos,
+  horarioConfig,
+}: {
+  paso: number;
+  setPaso: Function;
+  fechasArray: Date[];
+  turnos: ITurno[];
+  horarioConfig: any;
+}) => {
+  const [fechaElegida, setFechaElegida] = React.useState<Date | null>(null);
   const [horarioElegido, setHorarioElegido] = React.useState(0);
+
+  const arrayDeFechas = turnos.map((unTurno: ITurno) =>
+    addHours(new Date(unTurno.fecha), 3).getTime()
+  );
+  const horariosArray = generateHorariosArray(
+    horarioConfig.duracion,
+    horarioConfig.turno
+  );
+
+  console.log(arrayDeFechas);
 
   return (
     <AnimatePresence mode="wait">
@@ -66,66 +110,15 @@ const PasoUno = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
                 animate="visible"
                 exit={"exit"}
               >
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={1}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={2}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={3}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={4}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={5}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={6}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={7}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={8}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={9}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={10}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={11}
-                  setFechaElegida={setFechaElegida}
-                />
-                <UnaFecha
-                  fechaElegida={fechaElegida}
-                  id={12}
-                  setFechaElegida={setFechaElegida}
-                />
+                {fechasArray.reverse().map((unaFecha, i) => (
+                  <UnaFecha
+                    fecha={unaFecha}
+                    fechaElegida={fechaElegida}
+                    setFechaElegida={setFechaElegida}
+                    id={i}
+                    key={i}
+                  />
+                ))}
               </motion.div>
             </div>
           </AnimatePresence>
@@ -140,36 +133,29 @@ const PasoUno = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
               >
                 <h4 className="selector-dia-title">Seleccioná un horario</h4>
                 <div className="horarios-flex">
-                  <UnHorario
-                    id={1}
-                    horarioElegido={horarioElegido}
-                    setHorarioElegido={setHorarioElegido}
-                  />
-                  <UnHorario
-                    id={2}
-                    horarioElegido={horarioElegido}
-                    setHorarioElegido={setHorarioElegido}
-                  />
-                  <UnHorario
-                    id={3}
-                    horarioElegido={horarioElegido}
-                    setHorarioElegido={setHorarioElegido}
-                  />
-                  <UnHorario
-                    id={4}
-                    horarioElegido={horarioElegido}
-                    setHorarioElegido={setHorarioElegido}
-                  />
-                  <UnHorario
-                    id={5}
-                    horarioElegido={horarioElegido}
-                    setHorarioElegido={setHorarioElegido}
-                  />
-                  <UnHorario
-                    id={6}
-                    horarioElegido={horarioElegido}
-                    setHorarioElegido={setHorarioElegido}
-                  />
+                  {horariosArray.map((horario: string, i: number) => {
+                    const toParse = horario
+                      .split(":")
+                      .map((unHo) => parseInt(unHo));
+                    const hoursInMs = toParse[0] * 60 * 60 * 1000;
+                    const minInMs = toParse[1] * 60 * 1000;
+                    const total = fechaElegida.getTime() + hoursInMs + minInMs;
+                    const nuevaFecha = new Date(+fechaElegida);
+                    nuevaFecha.setTime(total);
+
+                    return (
+                      <UnHorario
+                        id={i + 1}
+                        horarioElegido={horarioElegido}
+                        setHorarioElegido={setHorarioElegido}
+                        horario={horario}
+                        key={i}
+                        isDisabled={arrayDeFechas.includes(
+                          nuevaFecha.getTime()
+                        )}
+                      />
+                    );
+                  })}
                 </div>
               </motion.div>
             </AnimatePresence>

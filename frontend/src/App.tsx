@@ -6,6 +6,7 @@ import Navegacion from "./components/Navegacion";
 import AnimatedRoutes from "./pages/AnimatedRoutes";
 import { fetchFromServer } from "./utils/APICalls";
 import { AuthContext, useAuthProvider } from "./utils/Hooks";
+import moment from "moment";
 
 export const AppContext = React.createContext({
   categorias: [],
@@ -32,6 +33,8 @@ const App = () => {
   const [shouldContextUpdate, setShouldContextUpdate] = React.useState(false);
   const value = useAuthProvider();
   const Auth = AuthContext;
+
+  moment.tz.setDefault("GMT0");
 
   React.useEffect(() => {
     fetchFromServer("/tratamientos", "GET")

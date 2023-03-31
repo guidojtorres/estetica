@@ -108,6 +108,13 @@ const HorariosSchema = new Schema({
   turno: { type: String, required: true },
 });
 
+const ReservasSchema = new Schema({
+  fecha: {
+    type: Date,
+    required: true,
+  },
+});
+
 const ContactoSchema = new Schema({
   nombre: { type: String, required: true },
   apellido: { type: String, required: true },
@@ -123,4 +130,5 @@ module.exports = {
   turno: mongoose.model("turno", TurnoSchema),
   contacto: mongoose.model("contacto", ContactoSchema),
   horario: mongoose.model("horario", HorariosSchema),
+  reserva: mongoose.model("reserva", ReservasSchema),
 };

@@ -6,6 +6,8 @@ const CategoriaController = require("../controllers/categoria");
 const TurnoController = require("../controllers/turno");
 const ContactoController = require("../controllers/contacto");
 const HorarioController = require("../controllers/horario");
+const ReservaController = require("../controllers/reserva");
+
 const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -76,6 +78,10 @@ router.post("/contactos", async (req, res) => {
 });
 
 router.get("/contactos", async (req, res) => {
+  ContactoController.all(req, res);
+});
+
+router.get("/horarios", async (req, res) => {
   HorarioController.all(req, res);
 });
 
@@ -83,4 +89,11 @@ router.put("/horarios", async (req, res) => {
   HorarioController.update(req, res);
 });
 
+router.put("/reservas/:id", async (req, res) => {
+  ReservaController.update(req, res);
+});
+
+router.get("/reservas", async (req, res) => {
+  ReservaController.all(req, res);
+});
 module.exports = router;
