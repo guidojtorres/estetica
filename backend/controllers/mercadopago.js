@@ -3,8 +3,6 @@ const db = require("../config/dbConfig");
 const TurnoModel = db.turno;
 
 exports.createPreference = async (req, res) => {
-  //Generar entrada  de mongo
-
   let preference = {
     items: [
       {
@@ -24,26 +22,7 @@ exports.createPreference = async (req, res) => {
   mercadopago.preferences
     .create(preference)
     .then(function (response) {
-      const entrada = new TurnoModel({
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        celular: req.body.celular,
-        email: req.body.email,
-        asunto: req.body.asunto,
-        modalidad: req.body.modalidad,
-        metodoDePago: req.body.mdp,
-        fuePagado: false,
-        fecha: req.body.fecha,
-        mensaje: req.body.mensaje,
-        paymentId: response.body.id,
-      });
-
-      entrada.save(entrada).catch((err) =>
-        res.status(500).send({
-          status: "KO",
-          errDesc: err.message || "Error creando nuevo turno",
-        })
-      );
+      res.status(200).send({ id: response.body.id });
     })
     .catch(function (error) {
       console.log(error);
@@ -51,6 +30,9 @@ exports.createPreference = async (req, res) => {
 };
 
 exports.feedback = async (req, res) => {
-  //actualizo entrada de mongo
-  res.send({ berno: req.params });
+  res.json({
+    Payment: req.query.payment_id,
+    Status: req.query.status,
+    MerchantOrder: req.query.merchant_order_id,
+  });
 };
