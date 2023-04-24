@@ -27,9 +27,9 @@ exports.createPreference = async (req, res) => {
       },
     ],
     back_urls: {
-      success: "https://estetica-beta.vercel.app/feedback",
-      failure: "https://estetica-beta.vercel.app/feedback",
-      pending: "https://estetica-beta.vercel.app/feedback",
+      success: "https://estetica-beta.vercel.app/api/feedback",
+      failure: "https://estetica-beta.vercel.app/api/feedback",
+      pending: "https://estetica-beta.vercel.app/api/feedback",
     },
     auto_return: "approved",
   };
