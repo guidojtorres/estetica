@@ -10,7 +10,7 @@ const MpModal = () => {
   const [isReady, setIsReady] = useState(false);
   const [orderData, setOrderData] = useState({
     quantity: "1",
-    price: "3000",
+    price: "1",
     amount: 1,
     description: "Some book",
   });
