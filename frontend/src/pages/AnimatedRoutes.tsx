@@ -10,6 +10,7 @@ import Home from "./Home";
 import Nosotros from "./Nosotros";
 import Tratamientos from "./Tratamientos";
 import Turno from "./Turno";
+import Feedback from "./Feedback";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -37,6 +38,7 @@ const AnimatedRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/feedback" element={<Feedback />}></Route>
       </Routes>
     </AnimatePresence>
   );
