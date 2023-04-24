@@ -7,6 +7,9 @@ import AnimatedRoutes from "./pages/AnimatedRoutes";
 import { fetchFromServer } from "./utils/APICalls";
 import { AuthContext, useAuthProvider } from "./utils/Hooks";
 import moment from "moment";
+import { initMercadoPago } from "@mercadopago/sdk-react";
+
+initMercadoPago("456288489");
 
 export const AppContext = React.createContext({
   categorias: [],

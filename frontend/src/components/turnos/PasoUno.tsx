@@ -11,6 +11,7 @@ import {
   convertIntToMonth,
   generateHorariosArray,
 } from "../../utils/functions";
+import { TurnosContext } from "./TurnoForm";
 
 function addHours(date: Date, h: number) {
   date.setTime(date.getTime() + h * 60 * 60 * 1000);
@@ -51,18 +52,27 @@ const UnHorario = ({
   setHorarioElegido,
   horario,
   isDisabled,
+  fecha,
 }: {
   id: number;
   horarioElegido: number;
   setHorarioElegido: Function;
   horario: string;
   isDisabled: boolean;
+  fecha: any;
 }) => {
+  const { turnoForm, setTurnoForm } = React.useContext(TurnosContext);
+
+  const handleClick = () => {
+    !isDisabled && setHorarioElegido(id);
+    setTurnoForm({ ...turnoForm, fecha: fecha });
+  };
+
   return (
     <motion.div
       className={`pill-horario ${horarioElegido === id && "active"} 
       ${isDisabled && "disabled"}`}
-      onClick={() => !isDisabled && setHorarioElegido(id)}
+      onClick={handleClick}
       variants={OpacityVariants}
     >
       <span>{horario}</span>
@@ -93,8 +103,6 @@ const PasoUno = ({
     horarioConfig.duracion,
     horarioConfig.turno
   );
-
-  console.log(arrayDeFechas);
 
   return (
     <AnimatePresence mode="wait">
@@ -153,6 +161,7 @@ const PasoUno = ({
                         isDisabled={arrayDeFechas.includes(
                           nuevaFecha.getTime()
                         )}
+                        fecha={nuevaFecha}
                       />
                     );
                   })}

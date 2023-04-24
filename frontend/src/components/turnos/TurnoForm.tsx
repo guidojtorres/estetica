@@ -24,7 +24,7 @@ const TurnoForm = ({
   paso: number;
   setPaso: Function;
 }) => {
-  const [turnoForm, setTurnoForm] = React.useState({});
+  const [turnoForm, setTurnoForm] = React.useState<ITurno>({} as ITurno);
   const [fechasArray, setFechasArray] = React.useState<Date[]>([new Date()]);
   const [turnos, setTurnos] = React.useState<ITurno[]>([{} as ITurno]);
   const [horarioConfig, setHorarioConfig] = React.useState();

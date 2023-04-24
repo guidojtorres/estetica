@@ -5,7 +5,68 @@ import {
   OpacityVariants,
 } from "../../utils/animations";
 import Button from "../Button";
+import { TurnosContext } from "./TurnoForm";
+import MpModal from "./MpModal";
 
+const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
+  return (
+    <AnimatePresence mode="popLayout">
+      <motion.div
+        variants={OpacityStaggerVariants}
+        initial="hidden"
+        animate="visible"
+        exit={"exit"}
+      >
+        <div className="pago-por-transferencia">
+          <motion.div variants={OpacityVariants}>
+            <h4>Pago por trasferencia bancaria</h4>
+            <p className="ppt-subtitle">
+              Podés realizar la transferencia del monto a abonar a la siguiente
+              cuenta
+            </p>
+          </motion.div>
+          <motion.div className="monto" variants={OpacityVariants}>
+            <span>Monto a pagar:</span>
+            <span>$4500</span>
+          </motion.div>
+          <motion.div className="datos" variants={OpacityVariants}>
+            <div className="un-dato">
+              <p>Nombre</p>
+              <span>Viviana Garcia</span>
+            </div>
+            <div className="un-dato">
+              <p>CBU</p>
+              <span>001234567 00123456700000</span>
+            </div>
+
+            <div className="un-dato">
+              <p>Alias de CBU</p>
+              <span>XXX.XXXX.XXXXX</span>
+            </div>
+          </motion.div>
+          <motion.div className="icono-imagen" variants={OpacityVariants}>
+            <img src="./img/file.png" alt="" />
+            <span>Envío de comprobante</span>
+          </motion.div>
+
+          <p className="info-comprobante">
+            Una vez que realices la trasferencia por favor envianos el
+            comprobante a ejemplo@gmail.com, o por Whatsapp a 11 0000 1122
+          </p>
+        </div>
+      </motion.div>
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          className="continuar-button"
+          variants={OpacityVariants}
+          onClick={() => setPaso(4)}
+        >
+          <Button variant="filled-pink">Ya realicé el pago</Button>
+        </motion.div>
+      </AnimatePresence>
+    </AnimatePresence>
+  );
+};
 const UnMetodo = ({
   mdp,
   nombre,
@@ -17,11 +78,23 @@ const UnMetodo = ({
   setMdp: Function;
   id: number;
 }) => {
+  const { turnoForm, setTurnoForm } = React.useContext(TurnosContext);
+
+  const handleClick = () => {
+    if (id === 1) {
+      setTurnoForm({ ...turnoForm, mdp: 1 });
+    } else {
+      setTurnoForm({ ...turnoForm, mdp: 0 });
+    }
+
+    setMdp(id);
+  };
+
   return (
     <motion.div
       variants={OpacityVariants}
       className={`metodo-de-pago ${mdp === id && "active"}`}
-      onClick={() => setMdp(id)}
+      onClick={handleClick}
     >
       <label htmlFor="mdp">{nombre}</label>
       <input type="radio" name="mdp" id="transferencia" checked={mdp === id} />
@@ -32,6 +105,11 @@ const UnMetodo = ({
 const PasoTres = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
   const [mdp, setMdp] = React.useState(0);
   const [selectedMdp, setSelectedMdp] = React.useState(false);
+
+  const handleSubmit = () => {
+    setSelectedMdp(true);
+  };
+
   return (
     <AnimatePresence mode="popLayout">
       {paso === 3 && !selectedMdp && (
@@ -61,6 +139,7 @@ const PasoTres = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
                 onClick={() => {
                   setSelectedMdp(true);
                 }}
+                disabled={mdp === 0}
               >
                 Continuar
               </Button>
@@ -68,63 +147,10 @@ const PasoTres = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
           </AnimatePresence>
         </motion.div>
       )}
-      {paso === 3 && selectedMdp && (
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            variants={OpacityStaggerVariants}
-            initial="hidden"
-            animate="visible"
-            exit={"exit"}
-          >
-            <div className="pago-por-transferencia">
-              <motion.div variants={OpacityVariants}>
-                <h4>Pago por trasferencia bancaria</h4>
-                <p className="ppt-subtitle">
-                  Podés realizar la transferencia del monto a abonar a la
-                  siguiente cuenta
-                </p>
-              </motion.div>
-              <motion.div className="monto" variants={OpacityVariants}>
-                <span>Monto a pagar:</span>
-                <span>$4500</span>
-              </motion.div>
-              <motion.div className="datos" variants={OpacityVariants}>
-                <div className="un-dato">
-                  <p>Nombre</p>
-                  <span>Viviana Garcia</span>
-                </div>
-                <div className="un-dato">
-                  <p>CBU</p>
-                  <span>001234567 00123456700000</span>
-                </div>
-
-                <div className="un-dato">
-                  <p>Alias de CBU</p>
-                  <span>XXX.XXXX.XXXXX</span>
-                </div>
-              </motion.div>
-              <motion.div className="icono-imagen" variants={OpacityVariants}>
-                <img src="./img/file.png" alt="" />
-                <span>Envío de comprobante</span>
-              </motion.div>
-
-              <p className="info-comprobante">
-                Una vez que realices la trasferencia por favor envianos el
-                comprobante a ejemplo@gmail.com, o por Whatsapp a 11 0000 1122
-              </p>
-            </div>
-          </motion.div>
-          <AnimatePresence mode="popLayout">
-            <motion.div
-              className="continuar-button"
-              variants={OpacityVariants}
-              onClick={() => setPaso(4)}
-            >
-              <Button variant="filled-pink">Ya realicé el pago</Button>
-            </motion.div>
-          </AnimatePresence>
-        </AnimatePresence>
+      {paso === 3 && selectedMdp && mdp === 1 && (
+        <PagoRealizado setPaso={setPaso} />
       )}
+      {paso === 3 && selectedMdp && mdp === 2 && <MpModal />}
     </AnimatePresence>
   );
 };

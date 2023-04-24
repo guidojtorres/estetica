@@ -9,7 +9,8 @@ import TextInput from "../TextInput";
 import { TurnosContext } from "./TurnoForm";
 
 const PasoDos = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
-  const { setTurnoForm } = React.useContext(TurnosContext);
+  const { turnoForm, setTurnoForm } = React.useContext(TurnosContext);
+
   return (
     <AnimatePresence mode="popLayout">
       {paso === 2 && (
@@ -62,11 +63,25 @@ const PasoDos = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
             <p style={{ margin: "0" }}>Modalidad de consulta:</p>
             <div className="checkbox-flex">
               <label htmlFor="presencial">Presencial</label>
-              <input type="radio" name="modalidad" id="presencial" />
+              <input
+                type="radio"
+                name="modalidad"
+                id="presencial"
+                onClick={() =>
+                  setTurnoForm({ ...turnoForm, modalidad: "Presencial" })
+                }
+              />
             </div>
             <div className="checkbox-flex">
               <label htmlFor="online">Online</label>
-              <input type="radio" name="modalidad" id="online" />
+              <input
+                type="radio"
+                name="modalidad"
+                id="online"
+                onClick={() =>
+                  setTurnoForm({ ...turnoForm, modalidad: "Online" })
+                }
+              />
             </div>
           </div>
 

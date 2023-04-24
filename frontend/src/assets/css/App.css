@@ -1658,6 +1658,41 @@ a .est-btn.filled-pink {
   padding-bottom: 40px;
 }
 
+.mp-modal {
+  padding: 20px;
+}
+
+.mp-title h1 {
+  color: #e288a3;
+  text-align: center;
+  font-weight: 600;
+  margin: 15px 0px;
+}
+
+.mp-title h4 {
+  color: #e7bdca;
+  font-weight: 500;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.mp-title p {
+  text-align: center;
+  color: #8b8b8b;
+}
+
+.mp-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0px;
+}
+
 .fecha-reserva {
   display: flex;
   flex-direction: column;

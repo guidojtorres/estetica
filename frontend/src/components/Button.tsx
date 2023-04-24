@@ -6,18 +6,21 @@ const Button = ({
   style,
   onClick,
   noArrow,
+  disabled,
 }: {
   children: any;
   variant: string;
   style?: object;
   onClick?: Function;
   noArrow?: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <button
       className={`est-btn ${variant}`}
       style={style}
       onClick={() => onClick && onClick()}
+      disabled={disabled}
     >
       {children}
       {!variant.includes("filled-pink") && !noArrow ? (

@@ -7,6 +7,7 @@ const TurnoController = require("../controllers/turno");
 const ContactoController = require("../controllers/contacto");
 const HorarioController = require("../controllers/horario");
 const ReservaController = require("../controllers/reserva");
+const MpController = require("../controllers/mercadopago");
 
 const multer = require("multer");
 const storage = multer.memoryStorage();
@@ -95,5 +96,13 @@ router.put("/reservas/:id", async (req, res) => {
 
 router.get("/reservas", async (req, res) => {
   ReservaController.all(req, res);
+});
+
+router.post("/crear-preferencia", async (req, res) => {
+  MpController.createPreference(req, res);
+});
+
+router.get("/feedback", async (req, res) => {
+  MpController.feedback(req, res);
 });
 module.exports = router;
