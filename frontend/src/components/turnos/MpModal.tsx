@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import { fetchFromServer } from "../../utils/APICalls";
-import Button from "../Button";
 import { SpinnerCircular } from "spinners-react";
 import { Wallet } from "@mercadopago/sdk-react";
+import { TurnosContext } from "./TurnoForm";
 
 const MpModal = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [orderData, setOrderData] = useState({
-    quantity: "1",
-    price: "1",
-    amount: 1,
-    description: "Some book",
-  });
+
+  const { turnoForm } = React.useContext(TurnosContext);
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetchFromServer("/crear-preferencia", "POST", orderData)
+    let orderData = turnoForm as any;
+    orderData.price = "1";
+    orderData.quantity = "1";
+    orderData.descripcion = "Consulta";
+    fetchFromServer("/crear-preferencia", "POST", turnoForm)
       .then((res) => setPreferenceId(res?.data.id))
       .catch((error) => alert(error))
       .finally(() => {
         setIsLoading(false);
       });
-  }, [orderData]);
+  }, [turnoForm]);
 
   const renderSpinner = () => {
-    if (isLoading) {
+    if (isLoading || !preferenceId) {
       return (
         <div className="spinner-wrapper">
           <SpinnerCircular color="#009EE3" />

@@ -101,6 +101,18 @@ const TurnoSchema = new Schema({
     required: false,
     type: String,
   },
+  paymentId: {
+    required: false,
+    type: String,
+  },
+  referencia: {
+    required: false,
+    type: String,
+  },
+  orderId: {
+    required: false,
+    type: String,
+  },
 });
 
 const HorariosSchema = new Schema({

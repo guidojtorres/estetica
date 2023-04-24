@@ -1,6 +1,23 @@
 const mercadopago = require("mercadopago");
+const db = require("../config/dbConfig");
+const TurnoModel = db.turno;
 
 exports.createPreference = async (req, res) => {
+  //Generar entrada  de mongo
+
+  const entrada = new TurnoModel({
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    celular: req.body.celular,
+    email: req.body.email,
+    asunto: req.body.asunto,
+    modalidad: req.body.modalidad,
+    metodoDePago: req.body.mdp,
+    fuePagado: false,
+    fecha: req.body.fecha,
+    mensaje: req.body.mensaje,
+  });
+
   let preference = {
     items: [
       {
@@ -10,29 +27,36 @@ exports.createPreference = async (req, res) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:8080/feedback",
-      failure: "http://localhost:8080/feedback",
-      pending: "http://localhost:8080/feedback",
+      success: "https://estetica-beta.vercel.app/feedback",
+      failure: "https://estetica-beta.vercel.app/feedback",
+      pending: "https://estetica-beta.vercel.app/feedback",
     },
     auto_return: "approved",
   };
 
-  mercadopago.preferences
-    .create(preference)
-    .then(function (response) {
-      res.json({
-        id: response.body.id,
-      });
+  entrada
+    .save(entrada)
+    .then(async () => {
+      mercadopago.preferences
+        .create(preference)
+        .then(function (response) {
+          res.json({
+            id: response.body.id,
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     })
-    .catch(function (error) {
-      console.log(error);
-    });
+    .catch((err) =>
+      res.status(500).send({
+        status: "KO",
+        errDesc: err.message || "Error creando nuevo turno",
+      })
+    );
 };
 
 exports.feedback = async (req, res) => {
-  res.json({
-    Payment: req.query.payment_id,
-    Status: req.query.status,
-    MerchantOrder: req.query.merchant_order_id,
-  });
+  //actualizo entrada de mongo
+  res.send({ berno: req.params });
 };
