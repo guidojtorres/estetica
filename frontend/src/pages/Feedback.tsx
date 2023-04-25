@@ -1,32 +1,25 @@
 import axios from "axios";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+import { fetchFromServer } from "../utils/APICalls";
 const Feedback = () => {
   let [searchParams, setSearchParams] = useSearchParams();
+  let [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const getReference = async () => {
-      const res = await axios({
-        method: "GET",
-        url: `https://api.mercadopago.com/checkout/preferences/${searchParams.get(
-          "preference_id"
-        )}`,
-        headers: {
-          Authorization:
-            "Bearer TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
-          "Access-Control-Allow-Origin": false,
-        },
+    async function updateTurno() {
+      const res = await fetchFromServer("/crear-turno-mp", "POST", {
+        ref_id: searchParams.get("preference_id"),
+        paymentId: searchParams.get("payment_id"),
+        status: searchParams.get("status"),
       });
 
-      console.log(res);
-    };
+      console.log(res?.data);
+    }
 
-    getReference();
+    updateTurno().then(() => setLoading(false));
   }, [searchParams]);
-  //@ts-ignore
-  for (const value of searchParams.values()) {
-    console.log(value);
-  }
+
   return <div>Feedback</div>;
 };
 
