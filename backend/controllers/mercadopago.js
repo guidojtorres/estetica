@@ -15,14 +15,14 @@ exports.crearReservaConPreferencia = async (req, res) => {
       "Access-Control-Allow-Origin": false,
     },
   });
-  const metadata = mpRes.data.metadata;
+  const metadata = await mpRes.data.metadata;
 
   const entrada = new ReservaModel({
     nombre: metadata.nombre,
     apellido: metadata.apellido,
     email: metadata.email,
     celular: metadata.celular,
-    asunto: metdata.asunto,
+    asunto: metadata.asunto,
     modalidad: metadata.modalidad,
     metodoDePago: metadata.metodoDePago,
     fecha: metadata.fecha,
