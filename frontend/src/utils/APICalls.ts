@@ -37,8 +37,6 @@ export const fetchFromServerWithFile = async (
   method: "POST" | "PUT",
   body: object
 ) => {
-  console.log(getFormData(body));
-
   const res = await axios({
     method,
     url: server + url,

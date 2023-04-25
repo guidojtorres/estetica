@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 const Feedback = () => {
@@ -5,19 +6,19 @@ const Feedback = () => {
 
   React.useEffect(() => {
     const getReference = async () => {
-      const res = await fetch(
-        `https://api.mercadopago.com/checkout/preferences/${searchParams.get(
+      const res = await axios({
+        method: "GET",
+        url: `https://api.mercadopago.com/checkout/preferences/${searchParams.get(
           "preference_id"
         )}`,
-        {
-          headers: {
-            Authorization:
-              "Bearer TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
-          },
-        }
-      );
-      const json = await res.json();
-      console.log(json);
+        headers: {
+          Accept: "*/*",
+          Authorization:
+            "Bearer TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
+        },
+      });
+
+      console.log(res);
     };
 
     getReference();
