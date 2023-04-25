@@ -13,11 +13,13 @@ const MpModal = () => {
 
   React.useEffect(() => {
     setIsLoading(true);
+
     let orderData = turnoForm as any;
-    orderData.price = "1";
+    orderData.price = "3000";
     orderData.quantity = "1";
-    orderData.descripcion = "Consulta";
-    fetchFromServer("/crear-preferencia", "POST", turnoForm)
+    orderData.descripcion = "Consulta con la Dra. Viviana garcia";
+
+    fetchFromServer("/crear-preferencia", "POST", orderData)
       .then((res) => setPreferenceId(res?.data.id))
       .catch((error) => alert(error))
       .finally(() => {
@@ -35,19 +37,19 @@ const MpModal = () => {
     }
   };
 
+  const handleReady = () => {
+    setIsReady(true);
+  };
+
   const renderCheckoutButton = (preferenceId: any) => {
     if (!preferenceId) return null;
 
     return (
       <Wallet
-        initialization={{ preferenceId: preferenceId }}
+        initialization={{ preferenceId: preferenceId, redirectMode: "modal" }}
         onReady={handleReady}
       />
     );
-  };
-
-  const handleReady = () => {
-    setIsReady(true);
   };
 
   return (

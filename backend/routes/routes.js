@@ -105,4 +105,8 @@ router.post("/crear-preferencia", async (req, res) => {
 router.get("/feedback", async (req, res) => {
   MpController.feedback(req, res);
 });
+
+router.post("/crear-turno-mp", async (req, res) => {
+  MpController.crearReservaConPreferencia(req, res);
+});
 module.exports = router;

@@ -9,7 +9,7 @@ import { AuthContext, useAuthProvider } from "./utils/Hooks";
 import moment from "moment";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 
-initMercadoPago("APP_USR-2f8d2ded-ba1a-4804-af48-54f8b62477a8");
+initMercadoPago("TEST-dbf122f3-63ea-48f9-8242-c23cc78e142e");
 
 export const AppContext = React.createContext({
   categorias: [],

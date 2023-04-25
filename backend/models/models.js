@@ -121,9 +121,59 @@ const HorariosSchema = new Schema({
 });
 
 const ReservasSchema = new Schema({
-  fecha: {
-    type: Date,
+  nombre: {
     required: true,
+    type: String,
+  },
+  apellido: {
+    required: true,
+    type: String,
+  },
+  celular: {
+    required: true,
+    type: String,
+  },
+  email: {
+    required: true,
+    type: String,
+  },
+  asunto: {
+    required: true,
+    type: String,
+  },
+  modalidad: {
+    type: String,
+    required: true,
+  },
+  metodoDePago: {
+    type: Number,
+    required: true,
+  },
+  fuePagado: {
+    type: Boolean,
+    required: false,
+  },
+  fecha: {
+    required: true,
+    type: Date,
+    index: true,
+    unique: true,
+  },
+  mensaje: {
+    required: false,
+    type: String,
+  },
+  paymentId: {
+    required: false,
+    type: String,
+  },
+  referencia: {
+    required: false,
+    type: String,
+  },
+  orderId: {
+    required: false,
+    type: String,
   },
 });
 

@@ -9,7 +9,7 @@ const mercadopago = require("mercadopago");
 
 mercadopago.configure({
   access_token:
-    "APP_USR-6472007596956044-041219-97925c7fb3abec95012b05d066d9f4cd-456288489",
+    "TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
 });
 
 app.use(express.urlencoded({ extended: false }));

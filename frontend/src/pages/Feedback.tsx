@@ -1,10 +1,31 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-
+import { useSearchParams } from "react-router-dom";
 const Feedback = () => {
-  let params = useParams();
-  console.log(params);
+  let [searchParams, setSearchParams] = useSearchParams();
 
+  React.useEffect(() => {
+    const getReference = async () => {
+      const res = await fetch(
+        `https://api.mercadopago.com/checkout/preferences/${searchParams.get(
+          "preference_id"
+        )}`,
+        {
+          headers: {
+            authorization:
+              "Bearer TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
+          },
+        }
+      );
+      const json = await res.json();
+      console.log(json);
+    };
+
+    getReference();
+  }, [searchParams]);
+  //@ts-ignore
+  for (const value of searchParams.values()) {
+    console.log(value);
+  }
   return <div>Feedback</div>;
 };
 
