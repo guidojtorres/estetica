@@ -17,7 +17,7 @@ exports.crearReservaConPreferencia = async (req, res) => {
   });
   const metadata = await mpRes.data.metadata;
 
-  const entrada = new ReservaModel({
+  const entrada = new TurnoModel({
     nombre: metadata.nombre,
     apellido: metadata.apellido,
     email: metadata.email,
