@@ -2194,8 +2194,14 @@ select:focus {
 
 .centro-medico-imagenes {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
+}
+
+.centro-medico-imagenes img {
+  flex-shrink: 1;
+  width: 300px;
+  height: 500px;
 }
 
 .datos-flex {
@@ -2364,6 +2370,11 @@ select:focus {
   .abono-container {
     padding: 10px;
   }
+  .centro-medico-imagenes {
+    flex-direction: column;
+    justify-content: center !important;
+  }
+
   .pago-por-transferencia {
     max-width: 90%;
     margin: 60px auto;
@@ -2380,12 +2391,20 @@ select:focus {
   }
 }
 
+@media (max-width: 1300px) {
+  .centro-medico-imagenes img {
+    width: 250px;
+  }
+}
+
 @media (max-width: 1040px) {
   .donde-estamos .first-col-content {
     padding: 60px 0px;
   }
   .cat-flex {
     overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: flex-start;
   }
   .navegacion {
     width: 100%;
@@ -2428,6 +2447,17 @@ select:focus {
 
   .contacto-form-title.small .gray-line {
     margin: 15px auto 40px auto;
+  }
+}
+
+@media (max-width: 1000px) {
+  .centro-medico-imagenes {
+    justify-content: space-around;
+    margin-bottom: 50px;
+  }
+
+  .centro-medico-imagenes img {
+    width: 300px;
   }
 }
 

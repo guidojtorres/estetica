@@ -118,7 +118,7 @@ const PasoUno = ({
                 animate="visible"
                 exit={"exit"}
               >
-                {fechasArray.reverse().map((unaFecha, i) => (
+                {fechasArray.map((unaFecha, i) => (
                   <UnaFecha
                     fecha={unaFecha}
                     fechaElegida={fechaElegida}

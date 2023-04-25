@@ -3,11 +3,15 @@ import React from "react";
 const LaDoctora = () => {
   return (
     <section className="la-doctora">
-      <img src="./img/big-star.png" alt="" className="la-doctora-vector" />
+      {/* <img src="./img/big-star.png" alt="" className="la-doctora-vector" /> */}
       <div className="la-doctora-container">
         <div className="row row-cols-1 row-cols-lg-2">
           <div className="col first-col">
-            <img src="./img/la-doctora.png" alt="" />
+            <img
+              src="./img/la-doctora.png"
+              alt=""
+              style={{ maxWidth: "100%" }}
+            />
           </div>
           <div className="col second-col">
             <div className="doctora-title">

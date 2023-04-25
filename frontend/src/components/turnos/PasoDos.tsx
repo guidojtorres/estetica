@@ -7,9 +7,29 @@ import {
 import Button from "../Button";
 import TextInput from "../TextInput";
 import { TurnosContext } from "./TurnoForm";
+import Swal from "sweetalert2";
 
 const PasoDos = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
   const { turnoForm, setTurnoForm } = React.useContext(TurnosContext);
+
+  const handleSubmit = () => {
+    if (
+      !turnoForm.nombre ||
+      !turnoForm.apellido ||
+      !turnoForm.celular ||
+      !turnoForm.email ||
+      !turnoForm.asunto ||
+      !turnoForm.modalidad
+    ) {
+      Swal.fire({
+        title: "Error",
+        text: "Debe completar todos los campos antes de continuar",
+        icon: "error",
+      });
+    } else {
+      setPaso(3);
+    }
+  };
 
   return (
     <AnimatePresence mode="popLayout">
@@ -87,7 +107,7 @@ const PasoDos = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
 
           <AnimatePresence>
             <motion.div className="continuar-button" variants={OpacityVariants}>
-              <Button variant="filled-pink" onClick={() => setPaso(3)}>
+              <Button variant="filled-pink" onClick={handleSubmit}>
                 Continuar
               </Button>
             </motion.div>

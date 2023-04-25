@@ -23,7 +23,11 @@ const HeaderBanner = () => {
             </Button>
           </div>
           <div className="col">
-            <div className="imagen-falsa"></div>
+            <img
+              src="./img/header-banner.png"
+              alt=""
+              style={{ maxWidth: "100%" }}
+            />
           </div>
         </div>
       </div>

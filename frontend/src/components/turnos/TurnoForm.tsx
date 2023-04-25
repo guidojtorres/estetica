@@ -11,7 +11,7 @@ import { fetchFromServer } from "../../utils/APICalls";
 import { ITurno } from "../../utils/types";
 
 export const TurnosContext = React.createContext({
-  turnoForm: {},
+  turnoForm: {} as ITurno,
   setTurnoForm: (prevState: any) => {},
 });
 

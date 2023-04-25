@@ -6,8 +6,8 @@ const CentroMedico = () => {
       <div className="estetica-container">
         <div className="row row-cols-1 row-cols-lg-2 g-0">
           <div className="col centro-medico-imagenes">
-            <img src="./img/centro-medico-adentro.png" alt="centro medico" />
-            <img src="./img/centro-medico-afuera.png" alt="centro-medico" />
+            <img src="./img/qs-1.jpg" alt="" />
+            <img src="./img/qs-2.jpg" alt="" />
           </div>
           <div className="col centro-medico-descripcion">
             <img
