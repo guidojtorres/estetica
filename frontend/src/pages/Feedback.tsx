@@ -12,9 +12,9 @@ const Feedback = () => {
           "preference_id"
         )}`,
         headers: {
-          Accept: "*/*",
           Authorization:
             "Bearer TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
+          "Access-Control-Allow-Origin": false,
         },
       });
 
