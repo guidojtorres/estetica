@@ -8,8 +8,7 @@ const routes = require("./routes/routes");
 const mercadopago = require("mercadopago");
 
 mercadopago.configure({
-  access_token:
-    "TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
+  access_token: process.env.MP_ACCESS_TOKEN,
 });
 
 app.use(express.urlencoded({ extended: false }));

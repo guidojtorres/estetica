@@ -16,9 +16,9 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (user.usuario === "admin" && user.contra === "admin") {
+    if (user.usuario === "rosario1997" && user.contra === "Polo26@") {
       login();
-      navigate("/admin/dashboard");
+      navigate("/miad/dashboard");
     } else {
       Swal.fire({
         icon: "error",
@@ -30,7 +30,7 @@ const AdminLogin = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to={"/admin/dashboard"} />;
+    return <Navigate to={"/miad/dashboard"} />;
   }
 
   return (

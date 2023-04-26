@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { useContext } from "react";
 import {
   OpacityStaggerVariants,
   OpacityVariants,
@@ -7,8 +7,37 @@ import {
 import Button from "../Button";
 import { TurnosContext } from "./TurnoForm";
 import MpModal from "./MpModal";
+import { fetchFromServer } from "../../utils/APICalls";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
+  const [turnoReservado, setTurnoReservado] = React.useState();
+  const { turnoForm } = useContext(TurnosContext);
+  const navigate = useNavigate();
+
+  const handlePost = async () => {
+    turnoForm.fuePagado = false;
+    turnoForm.metodoDePago = 0;
+    const res = await fetchFromServer("/turnos", "POST", turnoForm);
+    return res?.data;
+  };
+
+  const handleClick = async () => {
+    handlePost().then((res) => {
+      if (res.status === "OK") {
+        setTurnoReservado(res.info);
+        setPaso(4);
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: `Error creando nuevo turno ${res.errDesc}`,
+          icon: "error",
+        }).then(() => navigate("/"));
+      }
+    });
+  };
+
   return (
     <AnimatePresence mode="popLayout">
       <motion.div
@@ -27,21 +56,21 @@ const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
           </motion.div>
           <motion.div className="monto" variants={OpacityVariants}>
             <span>Monto a pagar:</span>
-            <span>$4500</span>
+            <span>$3000</span>
           </motion.div>
           <motion.div className="datos" variants={OpacityVariants}>
             <div className="un-dato">
-              <p>Nombre</p>
-              <span>Viviana Garcia</span>
+              <p>Titular</p>
+              <span>Garcia Viviana Alejandra</span>
             </div>
             <div className="un-dato">
               <p>CBU</p>
-              <span>001234567 00123456700000</span>
+              <span>0720163588000037158354</span>
             </div>
 
             <div className="un-dato">
               <p>Alias de CBU</p>
-              <span>XXX.XXXX.XXXXX</span>
+              <span>bairesbaires</span>
             </div>
           </motion.div>
           <motion.div className="icono-imagen" variants={OpacityVariants}>
@@ -51,7 +80,7 @@ const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
 
           <p className="info-comprobante">
             Una vez que realices la trasferencia por favor envianos el
-            comprobante a ejemplo@gmail.com, o por Whatsapp a 11 0000 1122
+            comprobante a estetivadravg@gmail.com, o por Whatsapp a 11 3111 2105
           </p>
         </div>
       </motion.div>
@@ -59,7 +88,7 @@ const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
         <motion.div
           className="continuar-button"
           variants={OpacityVariants}
-          onClick={() => setPaso(4)}
+          onClick={handleClick}
         >
           <Button variant="filled-pink">Ya realicé el pago</Button>
         </motion.div>
@@ -105,10 +134,6 @@ const UnMetodo = ({
 const PasoTres = ({ paso, setPaso }: { paso: number; setPaso: Function }) => {
   const [mdp, setMdp] = React.useState(0);
   const [selectedMdp, setSelectedMdp] = React.useState(false);
-
-  const handleSubmit = () => {
-    setSelectedMdp(true);
-  };
 
   return (
     <AnimatePresence mode="popLayout">

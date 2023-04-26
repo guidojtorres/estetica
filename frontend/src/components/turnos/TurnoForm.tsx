@@ -40,7 +40,7 @@ const TurnoForm = ({
     });
 
     let intervaloFiltrado = intervalo.filter(
-      (unaFecha: Date) => unaFecha.getDay() === 1 || unaFecha.getDay() === 5
+      (unaFecha: Date) => unaFecha.getDay() === 2 || unaFecha.getDay() === 5
     );
     setFechasArray(intervaloFiltrado);
   };

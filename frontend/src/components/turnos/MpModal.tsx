@@ -15,7 +15,7 @@ const MpModal = () => {
     setIsLoading(true);
 
     let orderData = turnoForm as any;
-    orderData.price = "3000";
+    orderData.price = "1";
     orderData.quantity = "1";
     orderData.descripcion = "Consulta con la Dra. Viviana garcia";
 

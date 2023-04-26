@@ -29,9 +29,9 @@ const AnimatedRoutes = () => {
         <Route path="/turnos" element={<Turno />}></Route>
         <Route path="/nosotros" element={<Nosotros />}></Route>
         <Route path="/contacto" element={<Contacto />}></Route>
-        <Route path="/admin" element={<AdminLogin />}></Route>
+        <Route path="/miad" element={<AdminLogin />}></Route>
         <Route
-          path="/admin/dashboard"
+          path="/miad/dashboard"
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
               <AdminDashboard />

@@ -12,8 +12,12 @@ const Footer = () => {
         </Link>
         <div className="footer-redes">
           <p>Encontranos en:</p>
-          <img src="./img/face.png" alt="" />
-          <img src="./img/ig.png" alt="" />
+          <a href="https://www.facebook.com/EsteticaVGOficial">
+            <img src="./img/face.png" alt="" />
+          </a>
+          <a href="https://www.instagram.com/esteticavg/?hl=es">
+            <img src="./img/ig.png" alt="" />
+          </a>
         </div>
       </div>
       <hr />

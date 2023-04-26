@@ -5,7 +5,7 @@ const Navegacion = () => {
   return (
     <nav
       className={`${!(pathname === "/") && "pink-bg"} ${
-        pathname.includes("/admin") && "d-none"
+        pathname.includes("/miad") && "d-none"
       }`}
     >
       <div className="navegacion">
