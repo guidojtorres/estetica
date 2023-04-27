@@ -2349,6 +2349,8 @@ select:focus {
     height: unset;
   }
 }
+
+
 @media (max-width: 768px) {
   .card-tratamiento {
     max-width: 290px;

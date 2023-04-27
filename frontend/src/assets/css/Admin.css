@@ -328,6 +328,26 @@ span.fp-p.active {
     height: 150px;
   }
 }
+@media (max-width: 1000px) {
+  .sidebar-wrapper {
+    position: relative;
+    height: unset;
+  }
+
+  .sidebar-content {
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .sidebar-links {
+    gap: 20px;
+  }
+
+  .admin-turnos-calendar {
+    padding: 0px 10px;
+  }
+}
+
 @media (max-width: 500px) {
   .imagenes-flex {
     overflow-x: scroll;
