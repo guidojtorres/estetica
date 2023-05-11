@@ -9,7 +9,7 @@ import { AuthContext, useAuthProvider } from "./utils/Hooks";
 import moment from "moment";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 
-const mp_pk = process.env.REACT_MP_PUBLIC_KEY || "null";
+const mp_pk = process.env.REACT_APP_MP_PUBLIC_KEY || "null";
 
 initMercadoPago(mp_pk);
 
