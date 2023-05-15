@@ -10,6 +10,7 @@ import {
 } from "../../../../utils/APICalls";
 import { popValue } from "../../../../utils/functions";
 import { ITratamiento, ICategoria } from "../../../../utils/types";
+import { RTE } from "./RTE";
 
 const ImgModal = ({
   img,
@@ -303,12 +304,11 @@ const TratamientoForm = ({
 
             <div className="col-lg-12">
               <label className="tf-label">Descripcion</label>
-
-              <TextInput
-                placeholder={selectedItem.descripcion}
-                setForm={setForm}
-                value={"descripcion"}
-                isTextArea
+              <RTE
+                content={selectedItem.descripcion}
+                onChange={(value: string) =>
+                  setForm({ ...form, descripcion: value })
+                }
               />
             </div>
             <div className="col-lg-6">
@@ -345,10 +345,11 @@ const TratamientoForm = ({
             <div className="col-lg-6">
               <label className="tf-label">Ver mas</label>
 
-              <TextInput
-                placeholder={selectedItem.verMas}
-                setForm={setForm}
-                value={"verMas"}
+              <RTE
+                content={selectedItem.verMas}
+                onChange={(value: string) =>
+                  setForm({ ...form, verMas: value })
+                }
               />
             </div>
             <div className="col-lg-12">

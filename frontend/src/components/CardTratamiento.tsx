@@ -33,7 +33,7 @@ const CardTratamiento = ({
         <div className="card-tratamiento">
           <img src={pathFoto} alt="" />
           <h4>{titulo}</h4>
-          <p>{descripcion}</p>
+          <div dangerouslySetInnerHTML={{ __html: descripcion }}></div>
         </div>
       </Link>
     );
@@ -45,7 +45,7 @@ const CardTratamiento = ({
       >
         <img src={pathFoto} alt="" />
         <h4>{titulo}</h4>
-        <p>{descripcion}</p>
+        <div dangerouslySetInnerHTML={{ __html: descripcion }}></div>
       </div>
     );
   }

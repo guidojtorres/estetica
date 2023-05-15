@@ -63,7 +63,9 @@ const DetalleTratamiento = () => {
               </div>
               <div className="detalle-descripcion">
                 <h6>Detalles del tratamiento</h6>
-                <p>{tratamiento.descripcion}</p>
+                <p
+                  dangerouslySetInnerHTML={{ __html: tratamiento.descripcion }}
+                ></p>
               </div>
               <div className="detalle-especificacion">
                 <p>¿En donde se puede emplear?</p>
@@ -77,7 +79,9 @@ const DetalleTratamiento = () => {
                   Ver más <img src="./img/cv-down.png" alt="" />
                 </span>
                 <div className={`vm-content ${verMas && "active"}`}>
-                  <p>{tratamiento.verMas}</p>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: tratamiento.verMas }}
+                  ></p>
                 </div>
               </div>
             </div>

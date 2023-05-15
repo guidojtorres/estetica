@@ -32,15 +32,16 @@ body {
 }
 
 .vm-content p {
-  display: -webkit-box !important;
-  -webkit-line-clamp: 1 !important;
-  -webkit-box-direction: vertical !important;
-  overflow: hidden !important;
-  opacity: 0;
-  max-height: initial;
+  margin-bottom: 9px !important;
+  font-weight: 400 !important;
+  font-family: "Lato" !important;
+  font-style: normal !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  color: #8b8b8b !important;
   height: 0;
-
-  transition: 0.3s ease-in-out opacity;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
 
 .vm-content.active p {
@@ -292,7 +293,7 @@ a:hover {
   margin-bottom: 5;
 }
 
-.card-destacada-texto p {
+.card-destacada-texto div {
   font-family: "Lato";
   font-style: normal;
   font-weight: 400;
@@ -785,7 +786,7 @@ a:hover {
   margin-bottom: 5;
 }
 
-.card-tratamiento p {
+.card-tratamiento div {
   font-family: "Lato";
   font-style: normal;
   font-weight: 400;
@@ -933,6 +934,7 @@ a:hover {
   line-height: 18px;
   /* or 129% */
   color: #8b8b8b;
+  margin-bottom: 9px;
 }
 
 .detalle-especificacion {
@@ -2349,7 +2351,6 @@ select:focus {
     height: unset;
   }
 }
-
 
 @media (max-width: 768px) {
   .card-tratamiento {

@@ -19,7 +19,7 @@ const CardDestacada = ({
       <img src={fileServer + pathFoto} alt="" />
       <div className="card-destacada-texto">
         <h5>{titulo}</h5>
-        <p>{descripcion}</p>
+        <div dangerouslySetInnerHTML={{ __html: descripcion }}></div>
       </div>
       <div className="mas-info">
         <Link to={`/tratamientos/${id}`}>Ver más información</Link>

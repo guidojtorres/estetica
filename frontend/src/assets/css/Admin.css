@@ -322,6 +322,28 @@ span.fp-p.active {
   padding: 10px;
 }
 
+.rte-wrapper {
+  border: 0.75px solid rgba(78, 78, 78, 0.6) !important;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 10px;
+  width: 100%;
+  transition: 0.3s ease-in-out all;
+  background-color: #fff;
+}
+
+.rte-wrapper p {
+  color: #8b8b8b;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
 @media (min-width: 1500px) {
   .imagenes-flex img {
     width: 150px;
