@@ -126,7 +126,13 @@ const UnMetodo = ({
       onClick={handleClick}
     >
       <label htmlFor="mdp">{nombre}</label>
-      <input type="radio" name="mdp" id="transferencia" checked={mdp === id} />
+      <input
+        type="radio"
+        name="mdp"
+        id="transferencia"
+        checked={mdp === id}
+        onChange={handleClick}
+      />
     </motion.div>
   );
 };

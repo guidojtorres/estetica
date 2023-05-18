@@ -9,8 +9,8 @@ exports.create = (req, res) => {
     email: req.body.email,
     asunto: req.body.asunto,
     modalidad: req.body.modalidad,
-    metodoDePago: req.body.metodoDePago,
-    fuePagado: req.body.fuePagado,
+    metodoDePago: req.body.mdp,
+    fuePagado: false,
     fecha: req.body.fecha,
   });
 

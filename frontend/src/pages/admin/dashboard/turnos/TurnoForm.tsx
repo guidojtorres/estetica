@@ -211,12 +211,16 @@ const TurnoForm = ({
                   <img
                     src="./img/banco.png"
                     alt=""
-                    className={`mdp-icon ${!turnObj.metodoDePago && "active"}`}
+                    className={`mdp-icon ${
+                      turnObj.metodoDePago === 1 && "active"
+                    }`}
                   />
                   <img
                     src="./img/mp.png"
                     alt=""
-                    className={`mdp-icon ${turnObj.metodoDePago && "active"}`}
+                    className={`mdp-icon ${
+                      turnObj.metodoDePago === 0 && "active"
+                    }`}
                   />
                 </>
               ) : (

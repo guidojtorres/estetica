@@ -11,6 +11,8 @@ const MpModal = () => {
 
   const { turnoForm } = React.useContext(TurnosContext);
 
+  console.log(turnoForm);
+
   React.useEffect(() => {
     setIsLoading(true);
 
