@@ -2,6 +2,8 @@ const db = require("../config/dbConfig");
 const TurnoModel = db.turno;
 
 exports.create = (req, res) => {
+  // req.body.fecha.setHours(req.body.fecha.getHours() - 3);
+
   const entrada = new TurnoModel({
     nombre: req.body.nombre,
     apellido: req.body.apellido,
@@ -9,7 +11,7 @@ exports.create = (req, res) => {
     email: req.body.email,
     asunto: req.body.asunto,
     modalidad: req.body.modalidad,
-    metodoDePago: req.body.mdp,
+    metodoDePago: 0,
     fuePagado: false,
     fecha: req.body.fecha,
   });

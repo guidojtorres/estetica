@@ -24,7 +24,7 @@ exports.crearReservaConPreferencia = async (req, res) => {
     celular: metadata.celular,
     asunto: metadata.asunto,
     modalidad: metadata.modalidad,
-    metodoDePago: metadata.metodoDePago,
+    metodoDePago: 1,
     fecha: metadata.fecha,
     mensaje: metadata.mensaje,
     fuePagado,

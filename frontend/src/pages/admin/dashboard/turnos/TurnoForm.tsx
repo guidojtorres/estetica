@@ -26,6 +26,17 @@ const TurnoForm = ({
     }
   }, [turno]);
 
+  const handleMetodoDePago = (mdp: number) => {
+    Swal.fire({
+      title: "Desea cambiar el metodo de pago?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#ed6ea7",
+    }).then((result) =>
+      result.isConfirmed ? setTurnObj({ ...turnObj, metodoDePago: mdp }) : null
+    );
+  };
+
   const handlePagado = () => {
     Swal.fire({
       title: "Desea cambiar el estado de pago?",
@@ -212,21 +223,23 @@ const TurnoForm = ({
                     src="./img/banco.png"
                     alt=""
                     className={`mdp-icon ${
-                      turnObj.metodoDePago === 1 && "active"
+                      turnObj.metodoDePago === 0 && "active"
                     }`}
+                    onClick={() => handleMetodoDePago(0)}
                   />
                   <img
                     src="./img/mp.png"
                     alt=""
                     className={`mdp-icon ${
-                      turnObj.metodoDePago === 0 && "active"
+                      turnObj.metodoDePago === 1 && "active"
                     }`}
+                    onClick={() => handleMetodoDePago(1)}
                   />
                 </>
               ) : (
                 <img
                   src={
-                    turnObj.metodoDePago ? "./img/banco.png" : "./img/mp.png"
+                    turnObj.metodoDePago ? "./img/mp.png" : "./img/banco.png"
                   }
                   alt=""
                   className="mdp-icon"

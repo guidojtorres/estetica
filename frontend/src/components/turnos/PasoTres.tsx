@@ -16,10 +16,15 @@ const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
   const { turnoForm } = useContext(TurnosContext);
   const navigate = useNavigate();
 
+  console.log(turnoForm);
+
   const handlePost = async () => {
-    turnoForm.fuePagado = false;
-    turnoForm.metodoDePago = 0;
-    const res = await fetchFromServer("/turnos", "POST", turnoForm);
+    const postObj = turnoForm as any;
+    postObj.fuePagado = false;
+    postObj.fecha.setHours(postObj.fecha.getHours() - 3);
+    console.log(typeof turnoForm.fecha);
+
+    const res = await fetchFromServer("/turnos", "POST", postObj);
     return res?.data;
   };
 
@@ -84,15 +89,13 @@ const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
           </p>
         </div>
       </motion.div>
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          className="continuar-button"
-          variants={OpacityVariants}
-          onClick={handleClick}
-        >
-          <Button variant="filled-pink">Ya realicé el pago</Button>
-        </motion.div>
-      </AnimatePresence>
+      <motion.div
+        className="continuar-button"
+        variants={OpacityVariants}
+        onClick={handleClick}
+      >
+        <Button variant="filled-pink">Ya realicé el pago</Button>
+      </motion.div>
     </AnimatePresence>
   );
 };

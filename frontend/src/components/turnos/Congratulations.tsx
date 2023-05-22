@@ -12,6 +12,8 @@ import { fetchFromServer } from "../../utils/APICalls";
 const Congratulations = ({ paso }: { paso: number }) => {
   const { turnoForm } = useContext(TurnosContext);
 
+  const fechaReservada = new Date(turnoForm.fecha);
+  fechaReservada.setHours(fechaReservada.getHours() + 3);
   return (
     <AnimatePresence mode="popLayout">
       {paso === 4 && (
@@ -46,7 +48,7 @@ const Congratulations = ({ paso }: { paso: number }) => {
           </motion.div>
           <motion.div className="fecha-reserva" variants={OpacityVariants}>
             <span>TURNO RESERVADO:</span>
-            <p>{turnoForm.fecha.toString()}</p>
+            <p>{fechaReservada.toString()}</p>
           </motion.div>
           <AnimatePresence>
             <motion.div className="continuar-button" variants={OpacityVariants}>
