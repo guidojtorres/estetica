@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 import { fileServer } from "../utils/APICalls";
+import { ITratamiento } from "../utils/types";
 
 const CardDestacada = ({
   titulo,
@@ -16,7 +17,10 @@ const CardDestacada = ({
 }) => {
   return (
     <div className="card-destacada">
-      <img src={fileServer + pathFoto} alt="" />
+      <img
+        src={pathFoto.startsWith("/") ? fileServer + pathFoto : pathFoto}
+        alt=""
+      />
       <div className="card-destacada-texto">
         <h5>{titulo}</h5>
         <div dangerouslySetInnerHTML={{ __html: descripcion }}></div>
@@ -41,7 +45,7 @@ const TratamientosDestacados = () => {
         <h1>Tratamientos destacados</h1>
         <div className="tratamientos-destacados-cards">
           {tratamientos &&
-            tratamientos.map((tratamiento: any) => {
+            tratamientos.map((tratamiento: ITratamiento) => {
               if (tratamiento.esDestacado) {
                 return (
                   <CardDestacada

@@ -2360,6 +2360,35 @@ select:focus {
     padding-top: 20px;
   }
 
+  .pills-flex {
+    overflow-x: scroll;
+    justify-content: flex-start;
+    margin: 0px 10px;
+  }
+
+  .est-select input {
+    width: 250px;
+  }
+
+  .breadcrumbs a {
+    font-size: 12px;
+  }
+
+  .header-banner {
+    padding-top: 40px;
+  }
+  .home-title h1 {
+    margin-bottom: 20px;
+  }
+  .footer-redes p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .content div {
+    padding: 50px 0px;
+  }
+
   .turno-form {
     padding: 50px 30px;
     margin: 50px 0;

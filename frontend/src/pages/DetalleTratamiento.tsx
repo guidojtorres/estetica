@@ -12,9 +12,10 @@ const DetalleTratamiento = () => {
   const { tratamientos } = React.useContext(AppContext);
   const [verMas, setVerMas] = React.useState(false);
 
-  let idPath = new URL("http://localhost:3000" + pathname).pathname
+  let idPath = new URL("https://dravivianagarcia.com.ar" + pathname).pathname
     .split("/")
     .slice(-1)[0];
+
   const tratamiento: ITratamiento = tratamientos.filter(
     (trat: ITratamiento) => idPath === trat._id
   )[0];
@@ -51,7 +52,11 @@ const DetalleTratamiento = () => {
                       fotoSrc.startsWith("/") ? fileServer + fotoSrc : fotoSrc
                     }
                     alt=""
-                    onClick={() => setCurrentImg(fileServer + fotoSrc)}
+                    onClick={() =>
+                      setCurrentImg(
+                        fotoSrc.startsWith("/") ? fileServer + fotoSrc : fotoSrc
+                      )
+                    }
                   />
                 ))}
               </div>
