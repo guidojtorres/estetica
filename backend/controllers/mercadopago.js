@@ -10,11 +10,10 @@ exports.crearReservaConPreferencia = async (req, res) => {
     method: "GET",
     url: `https://api.mercadopago.com/checkout/preferences/${req.body.ref_id}`,
     headers: {
-      Authorization:
-        "Bearer TEST-7169695604884447-042415-6d7143274bedca51c37cbd5d97b33720-1359790312",
+      Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
       "Access-Control-Allow-Origin": false,
     },
-  });
+  }).catch((e) => console.log(e));
 
   if (!mpRes.data) {
     res.send({
