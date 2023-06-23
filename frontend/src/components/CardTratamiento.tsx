@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ITratamiento } from "../utils/types";
+import { fileServer } from "../utils/APICalls";
 
 const CardTratamiento = ({
   titulo,
@@ -27,11 +28,13 @@ const CardTratamiento = ({
       : false
     : true;
 
+  const fotoUrl = pathFoto.startsWith("/") ? fileServer + pathFoto : pathFoto;
+
   if (isVisible && typeof categoriaElegida !== "undefined") {
     return (
       <Link to={`/tratamientos/${id}`} state={{ tratamiento }}>
         <div className="card-tratamiento">
-          <img src={pathFoto} alt="" />
+          <img src={fotoUrl} alt="" />
           <h4>{titulo}</h4>
           <div dangerouslySetInnerHTML={{ __html: descripcion }}></div>
         </div>
@@ -43,7 +46,7 @@ const CardTratamiento = ({
         className="card-tratamiento"
         onClick={() => setActive && setActive(id)}
       >
-        <img src={pathFoto} alt="" />
+        <img src={fotoUrl} alt="" />
         <h4>{titulo}</h4>
         <div dangerouslySetInnerHTML={{ __html: descripcion }}></div>
       </div>

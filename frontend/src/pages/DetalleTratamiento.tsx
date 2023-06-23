@@ -22,7 +22,12 @@ const DetalleTratamiento = () => {
   const [currentImg, setCurrentImg] = React.useState<string>();
 
   React.useEffect(() => {
-    if (tratamiento) setCurrentImg(fileServer + tratamiento.pathFotos[0]);
+    if (tratamiento)
+      setCurrentImg(
+        tratamiento.pathFotos[0].startsWith("/")
+          ? fileServer + tratamiento.pathFotos[0]
+          : tratamiento.pathFotos[0]
+      );
   }, [tratamiento]);
 
   if (tratamiento) {
@@ -42,7 +47,9 @@ const DetalleTratamiento = () => {
               <div className="imagenes-flex">
                 {tratamiento.pathFotos.map((fotoSrc: string) => (
                   <img
-                    src={fileServer + fotoSrc}
+                    src={
+                      fotoSrc.startsWith("/") ? fileServer + fotoSrc : fotoSrc
+                    }
                     alt=""
                     onClick={() => setCurrentImg(fileServer + fotoSrc)}
                   />

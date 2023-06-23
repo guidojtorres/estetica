@@ -5,43 +5,43 @@ const sharp = require("sharp");
 const fs = require("fs");
 
 exports.create = async (req, res) => {
-  let pathFotos = [];
+  // let pathFotos = [];
+  // if (!req.files) {
+  //   return res.status(500).send({
+  //     status: "KO",
+  //     errDesc: "Error en la subida de imagenes.",
+  //   });
+  // }
+  // await Promise.all(
+  //   req.files.map(async (file) => {
+  //     const { buffer, originalname } = file;
+  //     const rndStr = Math.random().toString(36).slice(2);
+  //     const newName = rndStr + originalname.replaceAll(" ", "");
 
-  if (!req.files) {
-    return res.status(500).send({
-      status: "KO",
-      errDesc: "Error en la subida de imagenes.",
-    });
-  }
-  await Promise.all(
-    req.files.map(async (file) => {
-      const { buffer, originalname } = file;
-      const rndStr = Math.random().toString(36).slice(2);
-      const newName = rndStr + originalname.replaceAll(" ", "");
+  //     await sharp(buffer)
+  //       .resize(475, 385)
+  //       .toFormat("png")
+  //       .png({ quality: 50 })
+  //       .toFile("./uploads/" + newName)
+  //       .catch((err) =>
+  //         res
+  //           .status(500)
+  //           .send({ status: "KO", errDesc: "Error subiendo archivou" })
+  //       );
 
-      await sharp(buffer)
-        .resize(475, 385)
-        .toFormat("png")
-        .png({ quality: 50 })
-        .toFile("./uploads/" + newName)
-        .catch((err) =>
-          res
-            .status(500)
-            .send({ status: "KO", errDesc: "Error subiendo archivou" })
-        );
-
-      pathFotos.push("/uploads/" + newName);
-    })
-  );
+  //     pathFotos.push("/uploads/" + newName);
+  //   })
+  // );
 
   const entrada = new TratamientoModel({
     titulo: req.body.titulo,
     descripcion: req.body.descripcion,
     subtitulo: req.body.subtitulo,
     categorias: req.body.categorias,
-    pathFotos,
+    pathFotos: req.body.pathFotos,
     esDestacado: req.body.esDestacado,
     dondeEmplear: req.body.dondeEmplear,
+    verMas: req.body.verMas,
   });
 
   entrada
@@ -86,19 +86,19 @@ exports.delete = (req, res) => {
       if (err || !data) {
         res.send({ status: "KO", errDesc: err.message, info: "" });
       } else {
-        if (data.pathFotos.length) {
-          data.pathFotos.forEach((foto) => {
-            fs.unlink("." + foto, (err) => {
-              if (err) {
-                console.error(err);
-                return res
-                  .status(500)
-                  .send({ status: "KO", info: "", errDesc: err });
-              }
-              //file removed
-            });
-          });
-        }
+        // if (data.pathFotos.length) {
+        //   data.pathFotos.forEach((foto) => {
+        //     fs.unlink("." + foto, (err) => {
+        //       if (err) {
+        //         console.error(err);
+        //         return res
+        //           .status(500)
+        //           .send({ status: "KO", info: "", errDesc: err });
+        //       }
+        //       //file removed
+        //     });
+        //   });
+        // }
 
         return res.send({ status: "OK", info: data, errDesc: "" });
       }
@@ -108,41 +108,41 @@ exports.delete = (req, res) => {
 
 exports.update = async (req, res) => {
   let doc = await TratamientoModel.findOne({ _id: req.params.id });
-  let pathFotos =
-    typeof req.body.pathFotos === "string"
-      ? [req.body.pathFotos]
-      : req.body.pathFotos;
+  // let pathFotos =
+  //   typeof req.body.pathFotos === "string"
+  //     ? [req.body.pathFotos]
+  //     : req.body.pathFotos;
 
-  if (!req.files) {
-    return res.status(500).send({
-      status: "KO",
-      errDesc: "Error en la subida de imagenes.",
-    });
-  }
-  await Promise.all(
-    req.files.map(async (file) => {
-      const { buffer, originalname } = file;
-      const rndStr = Math.random().toString(36).slice(2);
-      const newName = rndStr + originalname.replaceAll(" ", "");
+  // if (!req.files) {
+  //   return res.status(500).send({
+  //     status: "KO",
+  //     errDesc: "Error en la subida de imagenes.",
+  //   });
+  // }
 
-      await sharp(buffer)
-        .resize(475, 385)
-        .toFormat("png")
-        .png({ quality: 50 })
-        .toFile("/tmp/" + newName)
-        .catch((err) => {
-          console.log(err);
-          res
-            .status(500)
-            .send({ status: "KO", errDesc: "Error subiendo archivou" });
-        });
+  // await Promise.all(
+  //   req.files.map(async (file) => {
+  //     const { buffer, originalname } = file;
+  //     const rndStr = Math.random().toString(36).slice(2);
+  //     const newName = rndStr + originalname.replaceAll(" ", "");
 
-      pathFotos.push("/uploads/" + newName);
-    })
-  );
+  //     await sharp(buffer)
+  //       .resize(475, 385)
+  //       .toFormat("png")
+  //       .png({ quality: 50 })
+  //       .toFile("/tmp/" + newName)
+  //       .catch((err) => {
+  //         console.log(err);
+  //         res
+  //           .status(500)
+  //           .send({ status: "KO", errDesc: "Error subiendo archivou" });
+  //       });
+
+  //     pathFotos.push("/uploads/" + newName);
+  //   })
+  // );
 
   Object.keys(req.body).forEach((key) => (doc[key] = req.body[key]));
-  doc.pathFotos = pathFotos;
 
   doc
     .save()

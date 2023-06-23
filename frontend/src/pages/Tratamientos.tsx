@@ -110,7 +110,7 @@ const Tratamientos = () => {
                 titulo={tratamiento.titulo}
                 descripcion={tratamiento.descripcion}
                 id={tratamiento._id}
-                pathFoto={fileServer + tratamiento.pathFotos[0]}
+                pathFoto={tratamiento.pathFotos[0]}
                 categoriaElegida={categoriaElegida}
                 categorias={tratamiento.categorias}
                 key={tratamiento._id}

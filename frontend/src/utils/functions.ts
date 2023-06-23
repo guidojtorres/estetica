@@ -103,3 +103,12 @@ export function convertIntToDay(num: number) {
       return "Dom";
   }
 }
+
+export function isValidHttpUrl(s: string) {
+  try {
+    const newUrl = new URL(s);
+    return newUrl.protocol === "http:" || newUrl.protocol === "https:";
+  } catch (err) {
+    return false;
+  }
+}

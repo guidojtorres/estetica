@@ -5,6 +5,7 @@ import CardTratamiento from "../../../../components/CardTratamiento";
 import Heading from "../../../../components/Heading";
 import { fileServer } from "../../../../utils/APICalls";
 import TratamientoForm from "./TratamientoForm";
+import { ITratamiento } from "../../../../utils/types";
 
 const TratamientosDashboard = () => {
   const { tratamientos, setShouldContextUpdate } = React.useContext(AppContext);
@@ -26,7 +27,7 @@ const TratamientosDashboard = () => {
           style={{ margin: "0 auto", marginTop: "50px" }}
           onClick={handleCrearNuevo}
         >
-          Crear Nuevo{" "}
+          Crear Nuevo
           <img
             src="./img/imas.png"
             alt=""
@@ -41,7 +42,7 @@ const TratamientosDashboard = () => {
                 titulo={tratamiento.titulo}
                 descripcion={tratamiento.descripcion}
                 id={tratamiento._id}
-                pathFoto={fileServer + tratamiento.pathFotos[0]}
+                pathFoto={tratamiento.pathFotos[0]}
                 categorias={tratamiento.categorias}
                 key={tratamiento._id}
                 setActive={setActiveTratamiento}

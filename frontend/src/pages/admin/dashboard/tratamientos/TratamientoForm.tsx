@@ -11,44 +11,8 @@ import {
 import { popValue } from "../../../../utils/functions";
 import { ITratamiento, ICategoria } from "../../../../utils/types";
 import { RTE } from "./RTE";
-
-const ImgModal = ({
-  img,
-  isVisible,
-  setIsVisible,
-  handleDelete,
-}: {
-  img: string;
-  isVisible: boolean;
-  setIsVisible: Function;
-  handleDelete: Function;
-}) => {
-  if (isVisible) {
-    return (
-      <div className="modal-overlay-trat">
-        <div className="modal-content-trat">
-          <img src={img} alt="" className="trtm-modal-img" />
-          <img
-            src="./img/close.png"
-            alt=""
-            onClick={() => setIsVisible(false)}
-            className="mot-close"
-          />
-          <div style={{ flexBasis: "100%", width: "0" }}></div>
-          <Button
-            variant="filled-red"
-            noArrow
-            onClick={() => handleDelete(img)}
-          >
-            Borrar
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  return null;
-};
+import { ImgModal } from "./ImgModal";
+import ImgInputModal from "./ImgInputModal";
 
 const tratamientoFactory = (): ITratamiento => {
   return {
@@ -77,10 +41,12 @@ const TratamientoForm = ({
   const { tratamientos, categorias } = React.useContext(AppContext);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const [modalImg, setModalImg] = React.useState("");
+  const [modalInputImg, setModalInputImg] = React.useState<boolean>(false);
 
   const handleModal = (img: string) => {
     setModalImg(img);
     setIsModalVisible(true);
+    window.scrollTo(0, 0);
   };
 
   const tratamientoFinder = (): ITratamiento => {
@@ -89,7 +55,7 @@ const TratamientoForm = ({
     )[0];
   };
 
-  const [selectedFiles, setSelectedFiles] = React.useState<File[]>([]);
+  const [selectedFiles, setSelectedFiles] = React.useState<string[]>([]);
   const [previews, setPreviews] = React.useState<string[]>([]);
   const [selectedItem, setSelectedItem] = React.useState<ITratamiento>(
     activeItem === "nuevo" ? tratamientoFactory() : tratamientoFinder()
@@ -102,7 +68,9 @@ const TratamientoForm = ({
   React.useEffect(() => {
     setSelectedItem((prevState: ITratamiento) => ({
       ...prevState,
-      pathFotos: prevState.pathFotos.map((foto) => fileServer + foto),
+      pathFotos: prevState.pathFotos.map((foto) =>
+        foto.startsWith("/") ? fileServer + foto : foto
+      ),
     }));
   }, []);
 
@@ -110,16 +78,14 @@ const TratamientoForm = ({
     setPreviews(selectedItem.pathFotos);
   }, [selectedItem.pathFotos]);
 
-  const handleFileAdd = (event: any) => {
+  const handleFileAdd = async (url: string) => {
     if (selectedFiles.length + selectedItem.pathFotos.length > 5) {
       return Swal.fire("Maximo 5 fotos.", "", "error");
     }
 
-    setPreviews((prevState) => [
-      ...prevState,
-      URL.createObjectURL(event.target.files[0]),
-    ]);
-    setSelectedFiles((prevState) => [...prevState, event.target.files[0]]);
+    setPreviews((prevState) => [...prevState, url]);
+    setSelectedFiles((prevState) => [...prevState, url]);
+    setModalInputImg(false);
   };
 
   const handleFileDelete = (fileUrl: string) => {
@@ -136,9 +102,9 @@ const TratamientoForm = ({
         prevState.filter((v: string, i: number) => i !== index)
       );
     } else {
-      setSelectedFiles((prevState: File[]) =>
+      setSelectedFiles((prevState: string[]) =>
         prevState.filter(
-          (v: File, i: number) => i !== index - selectedItem.pathFotos.length
+          (v: string, i: number) => i !== index - selectedItem.pathFotos.length
         )
       );
       setPreviews((prevState: any) =>
@@ -166,13 +132,12 @@ const TratamientoForm = ({
   };
 
   const handleModify = async () => {
-    const fd: any = getFormData(form);
-    selectedFiles.forEach((selectedFile) => fd.append("images", selectedFile));
+    form.pathFotos = previews;
 
     const res = await fetchFromServer(
       `/tratamientos/${selectedItem._id}`,
       "PUT",
-      fd
+      form
     );
 
     if (res?.data.status === "OK") {
@@ -236,12 +201,8 @@ const TratamientoForm = ({
       selectedFiles.length > 0 &&
       check
     ) {
-      const fd: any = getFormData(form);
-      selectedFiles.forEach((selectedFile) =>
-        fd.append("images", selectedFile)
-      );
-
-      const res = await fetchFromServer("/tratamientos", "POST", fd);
+      form.pathFotos = selectedFiles;
+      const res = await fetchFromServer("/tratamientos", "POST", form);
       if (res?.data.status === "OK") {
         Swal.fire({
           title: "Nuevo tratamiento creado!",
@@ -384,15 +345,16 @@ const TratamientoForm = ({
                     onClick={() => handleModal(pre)}
                   />
                 ))}
-                <label htmlFor="fileToPush">
+                <label
+                  htmlFor="fileToPush"
+                  onClick={() => setModalInputImg(true)}
+                >
                   <img src="./img/mas.png" alt="" className="mas-icon" />
                 </label>
-                <input
-                  type="file"
-                  name="fileToPush"
-                  id="fileToPush"
-                  style={{ display: "none" }}
-                  onChange={(e) => handleFileAdd(e)}
+                <ImgInputModal
+                  isVisible={modalInputImg}
+                  setIsVisible={setModalInputImg}
+                  saveHandler={handleFileAdd}
                 />
               </div>
             </div>

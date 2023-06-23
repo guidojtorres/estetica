@@ -30,7 +30,10 @@ export const RTE = ({
 
   return (
     <div className="rte-wrapper">
-      <EditorContent editor={editor} />
+      <EditorContent
+        editor={editor}
+        style={{ width: "100%", height: "100%" }}
+      />
     </div>
   );
 };
