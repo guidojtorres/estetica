@@ -25,8 +25,7 @@ const Feedback = () => {
         ref_id: searchParams.get("preference_id"),
         paymentId: searchParams.get("payment_id"),
         status: searchParams.get("status"),
-      });
-
+      }).catch((e) => alert(`Error creando el turno: ${e}`));
       return res?.data;
     }
 
@@ -38,22 +37,34 @@ const Feedback = () => {
   return (
     <div>
       {renderSpinner()}
-      {!loading && turno && (
-        <div className="feedback-wrapper">
-          <h1>
-            {searchParams.get("status") === "approved"
-              ? "Turno reservado."
-              : "Error en el pago."}
-          </h1>
-          <p>
-            {searchParams.get("status") === "approved"
-              ? `Tu turno fue reservado en la fecha: ${turno.fecha.toString()}`
-              : "Error de pago, por favor intente de nuevo en unos minutos."}
-          </p>
-          <Button noArrow variant="filled-pink" onClick={() => navigate("/")}>
-            Inicio
-          </Button>
-        </div>
+      {!loading ? (
+        turno ? (
+          <div className="feedback-wrapper">
+            <h1>
+              {searchParams.get("status") === "approved"
+                ? "Turno reservado."
+                : "Error en el pago."}
+            </h1>
+            <p>
+              {searchParams.get("status") === "approved"
+                ? `Tu turno fue reservado en la fecha: ${turno.fecha.toString()}`
+                : "Error de pago, por favor intente de nuevo en unos minutos."}
+            </p>
+            <Button noArrow variant="filled-pink" onClick={() => navigate("/")}>
+              Inicio
+            </Button>
+          </div>
+        ) : (
+          <div className="feedback-wrapper">
+            <h1>Error creando el turno.</h1>
+            <p>
+              Nos encontramos con problemas tecnicos para reservar tu turno. Por
+              favor contactese con nosotros.
+            </p>
+          </div>
+        )
+      ) : (
+        <></>
       )}
     </div>
   );

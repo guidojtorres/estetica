@@ -15,6 +15,16 @@ exports.crearReservaConPreferencia = async (req, res) => {
       "Access-Control-Allow-Origin": false,
     },
   });
+
+  if (!mpRes.data) {
+    res.send({
+      status: "KO",
+      info: {},
+      errDesc: `Hubo un error recuperando los datos de tu turno. Numero de referencia: ${req.body.ref_id}`,
+    });
+    return;
+  }
+
   const metadata = await mpRes.data.metadata;
 
   const entrada = new TurnoModel({
@@ -107,7 +117,7 @@ exports.feedback = async (req, res) => {
     .catch((err) =>
       res.status(500).send({
         status: "KO",
-        errDesc: err.message || "Error obteniendo el tratamiento",
+        errDesc: err.message || "Error obteniendo el turno",
       })
     );
 };

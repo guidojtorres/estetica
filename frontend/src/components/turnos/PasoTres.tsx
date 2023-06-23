@@ -16,13 +16,10 @@ const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
   const { turnoForm } = useContext(TurnosContext);
   const navigate = useNavigate();
 
-  console.log(turnoForm);
-
   const handlePost = async () => {
     const postObj = turnoForm as any;
     postObj.fuePagado = false;
     postObj.fecha.setHours(postObj.fecha.getHours() - 3);
-    console.log(typeof turnoForm.fecha);
 
     const res = await fetchFromServer("/turnos", "POST", postObj);
     return res?.data;
