@@ -7,11 +7,11 @@ import {
 import Button from "../Button";
 import { TurnosContext } from "./TurnoForm";
 import MpModal from "./MpModal";
-import { fetchFromServer } from "../../utils/APICalls";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { fetchFromServer } from "../../utils/APICalls";
 
-const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
+export const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
   const [turnoReservado, setTurnoReservado] = React.useState();
   const { turnoForm } = useContext(TurnosContext);
   const navigate = useNavigate();
@@ -96,6 +96,7 @@ const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
     </AnimatePresence>
   );
 };
+
 const UnMetodo = ({
   mdp,
   nombre,

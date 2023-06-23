@@ -15,9 +15,11 @@ const MpModal = () => {
     setIsLoading(true);
 
     let orderData = turnoForm as any;
-    orderData.price = "1";
+    orderData.price = "3000";
     orderData.quantity = "1";
     orderData.descripcion = "Consulta con la Dra. Viviana garcia";
+    orderData.fuePagado = false;
+    orderData.fecha.setHours(orderData.fecha.getHours() - 3);
 
     fetchFromServer("/crear-preferencia", "POST", orderData)
       .then((res) => setPreferenceId(res?.data.id))
