@@ -71,9 +71,9 @@ exports.createPreference = async (req, res) => {
       },
     ],
     back_urls: {
-      success: "https://estetica-nine.vercel.app/feedback",
-      failure: "https://estetica-nine.vercel.app/feedback",
-      pending: "https://estetica-nine.vercel.app/feedback",
+      success: "https://www.dravivianagarcia.com.ar/feedback",
+      failure: "https://www.dravivianagarcia.com.ar/feedback",
+      pending: "https://www.dravivianagarcia.com.ar/feedback",
     },
     auto_return: "approved",
     metadata,
