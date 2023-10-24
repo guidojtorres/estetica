@@ -58,7 +58,7 @@ export const PagoRealizado = ({ setPaso }: { setPaso: Function }) => {
           </motion.div>
           <motion.div className="monto" variants={OpacityVariants}>
             <span>Monto a pagar:</span>
-            <span>$3000</span>
+            <span>$4300</span>
           </motion.div>
           <motion.div className="datos" variants={OpacityVariants}>
             <div className="un-dato">

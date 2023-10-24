@@ -38,7 +38,7 @@ const InfoTurnos = ({ step, setStep }: { step: number; setStep: Function }) => {
               <img src="./img/icon-precio.png" alt="" />
               <div>
                 <p>Precio de la consulta:</p>
-                <p>$3.000</p>
+                <p>$4.300</p>
               </div>
             </div>
             <div className="una-forma">
