@@ -2576,3 +2576,29 @@ select:focus {
     width: 100%;
   }
 }
+
+@supports not (display: -webkit-box) {
+  .card-destacada {
+    height: unset;
+  }
+  .card-destacada-texto div {
+    max-height: 150px;
+    display: block;
+  }
+
+  .card-destacada-texto div p {
+    overflow: hidden;
+  }
+  .card-tratamiento div {
+    max-height: 100px;
+    display: block;
+  }
+
+  .card-tratamiento div p {
+    overflow: hidden;
+  }
+
+  .card-tratamiento {
+    height: unset;
+  }
+}
