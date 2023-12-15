@@ -26,7 +26,7 @@ const AnimatedRoutes = () => {
           path="/tratamientos/:id"
           element={<DetalleTratamiento />}
         ></Route>
-        <Route path="/turnos" element={<Turno />}></Route>
+        {/* <Route path="/turnos" element={<Turno />}></Route> */}
         <Route path="/nosotros" element={<Nosotros />}></Route>
         <Route path="/contacto" element={<Contacto />}></Route>
         <Route path="/miad" element={<AdminLogin />}></Route>
