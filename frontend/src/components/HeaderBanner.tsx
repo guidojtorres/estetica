@@ -19,7 +19,9 @@ const HeaderBanner = () => {
               increíbles ¡Te esperamos!
             </p>
             <Button variant="pink">
-              <Link to={"/turnos"}>Agendar consulta</Link>
+              <a href="https://wiri.la/profesional/garcia-viviana/6af85fe6">
+                Agendar consulta
+              </a>
             </Button>
           </div>
           <div className="col">

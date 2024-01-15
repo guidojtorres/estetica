@@ -23,9 +23,9 @@ const Navegacion = () => {
           <Link to={"/contacto"}>
             <span>Contacto</span>
           </Link>
-          <Link to={"/turnos"}>
+          <a href="https://wiri.la/profesional/garcia-viviana/6af85fe6">
             <span>Turno</span>
-          </Link>
+          </a>
         </div>
       </div>
     </nav>

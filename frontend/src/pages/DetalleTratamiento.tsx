@@ -70,7 +70,9 @@ const DetalleTratamiento = () => {
               </div>
               <div className="detalle-button">
                 <Button variant="filled-pink">
-                  <Link to={"/turnos"}>Agendá tu consulta</Link>
+                  <a href="https://wiri.la/profesional/garcia-viviana/6af85fe6">
+                    Agendá tu consulta
+                  </a>
                 </Button>
               </div>
               <div className="detalle-descripcion">

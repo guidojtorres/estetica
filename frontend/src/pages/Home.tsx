@@ -28,7 +28,9 @@ const Home = () => {
             <h4>Podes sacar tu turno online o presencial desde esta web.</h4>
           </div>
           <Button variant="white">
-            <Link to={"/turnos"}>Agendá tu consulta</Link>
+            <a href="https://wiri.la/profesional/garcia-viviana/6af85fe6">
+              Agendá tu consulta
+            </a>
           </Button>
         </div>
       </FullWidthBanner>

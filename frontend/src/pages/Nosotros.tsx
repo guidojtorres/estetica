@@ -31,7 +31,9 @@ const Nosotros = () => {
             nuestro trabajo.
           </p>
           <Button variant="white" noArrow>
-            <Link to={"/turnos"}>Agendar consulta</Link>
+            <a href="https://wiri.la/profesional/garcia-viviana/6af85fe6">
+              Agendar consulta
+            </a>
           </Button>
         </div>
       </FullWidthBanner>
