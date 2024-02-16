@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../components/Button";
 import ContactoForm from "../components/ContactoForm";
 import Heading from "../components/Heading";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Modal } from "../components/Modal";
 
 const Contacto = () => {
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -14,6 +18,14 @@ const Contacto = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        redirectUrl="https://wiri.la/profesional/garcia-viviana/6af85fe6"
+        title="Wiri"
+      />
       <Heading title="Contacto"></Heading>
       <section className="contacto">
         <div className="estetica-container">
@@ -63,7 +75,7 @@ const Contacto = () => {
                   noArrow
                   variant="gray middle-mobile"
                   style={{ marginTop: "80px" }}
-                  onClick={() => navigate("/turnos")}
+                  onClick={handleModalOpen}
                 >
                   Agendar consulta ahora
                 </Button>

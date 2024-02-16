@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import Button from "../components/Button";
 
 import CategoriasDestacadas from "../components/CategoriasDestacadas";
@@ -9,8 +8,13 @@ import FullWidthBanner from "../components/FullWidthBanner";
 import HeaderBanner from "../components/HeaderBanner";
 import Novedades from "../components/Novedades";
 import TratamientosDestacados from "../components/TratamientosDestacados";
+import { Modal } from "../components/Modal";
 
 const Home = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -18,6 +22,14 @@ const Home = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        redirectUrl="https://wiri.la/profesional/garcia-viviana/6af85fe6"
+        title="Wiri"
+      />
       <HeaderBanner />
       <TratamientosDestacados />
       <CategoriasDestacadas />
@@ -27,10 +39,8 @@ const Home = () => {
             <h1>¿Necesitás hacer una consulta?</h1>
             <h4>Podes sacar tu turno online o presencial desde esta web.</h4>
           </div>
-          <Button variant="white">
-            <a href="https://wiri.la/profesional/garcia-viviana/6af85fe6">
-              Agendá tu consulta
-            </a>
+          <Button variant="white" onClick={handleModalOpen}>
+            Agendá tu consulta
           </Button>
         </div>
       </FullWidthBanner>

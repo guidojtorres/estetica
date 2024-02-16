@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import { Modal } from "./Modal";
 
 const HeaderBanner = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
   return (
     <header className="header-banner">
       <div className="estetica-container">
@@ -18,10 +23,8 @@ const HeaderBanner = () => {
               tratamiento que mejor se adapte a vos y así conseguir resultados
               increíbles ¡Te esperamos!
             </p>
-            <Button variant="pink">
-              <a href="https://wiri.la/profesional/garcia-viviana/6af85fe6">
-                Agendar consulta
-              </a>
+            <Button variant="pink" onClick={handleModalOpen}>
+              Agendar consulta
             </Button>
           </div>
           <div className="col">
@@ -33,6 +36,14 @@ const HeaderBanner = () => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        redirectUrl="https://wiri.la/profesional/garcia-viviana/6af85fe6"
+        title="Wiri"
+      />
     </header>
   );
 };
