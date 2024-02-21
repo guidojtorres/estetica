@@ -32,7 +32,15 @@ const DondeEstamos = () => {
           </div>
         </div>
         <div className="col">
-          <img src="./img/Mapa.png" alt="mapa" style={{ width: "100%" }} />
+          <iframe
+            width="100%"
+            height="500"
+            style={{ border: 0 }}
+            loading="lazy"
+            title="Maps"
+            allowFullScreen
+            src="https://www.google.com/maps/embed/v1/search?q=Dra.%20Viviana%20Garcia%2C%20Charcas%2C%20Buenos%20Aires%2C%20Argentina&key=AIzaSyBg3mVZ_Gxx2I8MNweSKPIbYMbgw5wsJv8"
+          ></iframe>
         </div>
       </div>
     </section>
