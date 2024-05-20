@@ -18,7 +18,11 @@ const CardDestacada = ({
   return (
     <div className="card-destacada">
       <img
-        src={pathFoto.startsWith("/") ? fileServer + pathFoto : pathFoto}
+        src={
+          pathFoto && pathFoto.startsWith("/")
+            ? fileServer + pathFoto
+            : pathFoto
+        }
         alt=""
       />
       <div className="card-destacada-texto">
@@ -44,7 +48,7 @@ const TratamientosDestacados = () => {
       <div className="estetica-container">
         <h1>Tratamientos destacados</h1>
         <div className="tratamientos-destacados-cards">
-          {tratamientos &&
+          {tratamientos.length &&
             tratamientos.map((tratamiento: ITratamiento) => {
               if (tratamiento.esDestacado) {
                 return (

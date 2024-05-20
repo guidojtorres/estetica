@@ -28,7 +28,8 @@ const CardTratamiento = ({
       : false
     : true;
 
-  const fotoUrl = pathFoto.startsWith("/") ? fileServer + pathFoto : pathFoto;
+  const fotoUrl =
+    pathFoto && pathFoto.startsWith("/") ? fileServer + pathFoto : pathFoto;
 
   if (isVisible && typeof categoriaElegida !== "undefined") {
     return (

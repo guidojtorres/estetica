@@ -44,7 +44,8 @@ const App = () => {
   React.useEffect(() => {
     fetchFromServer("/tratamientos", "GET")
       .then((json) => setTratamientos(json?.data.info))
-      .catch();
+      .catch()
+      .finally();
 
     fetchFromServer("/categorias", "GET")
       .then((json) => setCategorias(json?.data.info))
